@@ -1,0 +1,11 @@
+node_modules/
+
+# 実行時に自動生成されるログファイル
+*.log
+
+yarn.lock
+
+# 機密情報が含まれる環境変数ファイル（GitHubへの流出防止）
+.env
+
+/generated/prisma

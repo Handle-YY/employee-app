@@ -1,0 +1,43 @@
+//- new.pug
+//- 従業員の新規登録フォームページ
+
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    title 従業員登録
+    style.
+      body { font-family: sans-serif; margin: 40px; }
+      form { display: flex; flex-direction: column; max-width: 400px; }
+      label { margin-top: 12px; margin-bottom: 4px; }
+      input, select { padding: 6px 8px; font-size: 14px; }
+      button { margin-top: 20px; padding: 8px 16px; font-size: 14px; cursor: pointer; }
+      a { display: inline-block; margin-top: 16px; }
+  body
+    h1 従業員登録
+
+    //- 登録フォーム
+    //- POSTメソッドで/employeesに送信する
+    form(action="/employees" method="post")
+      label(for="name") 氏名
+      input(type="text" id="name" name="name" required)
+
+      label(for="department") 部門
+      select(id="department" name="department")
+        option(value="開発部") 開発部
+        option(value="営業部") 営業部
+        option(value="人事部") 人事部
+
+      label(for="position") 役職
+      select(id="position" name="position")
+        option(value="一般") 一般
+        option(value="主任") 主任
+        option(value="課長") 課長
+
+      label(for="hireYear") 入社年
+      input(type="number" id="hireYear" name="hireYear" min="1900" max="2100" required)
+
+      button(type="submit") 登録する
+
+    //- 一覧ページに戻るリンク
+    a(href="/employees") 一覧に戻る

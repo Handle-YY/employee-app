@@ -1,0 +1,33 @@
+# Docker Composeの設定ファイル
+# appとdbの2つのサービスを定義する
+
+services:
+  # アプリケーションサービス
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # ホスト側の変更がコンテナ内に即反映される
+      - .:/app
+      - node_modules:/app/node_modules
+    depends_on:
+      # dbが起動してからappを起動する
+      - db
+    command: sleep infinity
+
+  # データベースサービス
+  db:
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: employee_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: employee_db
+    volumes:
+      # コンテナ終了後もデータを保持するためVolumeを使用
+      - employee_db_data:/var/lib/postgresql/data
+
+# Volumeの定義（データ永続化）
+volumes:
+  node_modules:
+  employee_db_data:

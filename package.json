@@ -1,0 +1,19 @@
+{
+  "name": "employee-app",
+  "version": "1.0.0",
+  "description": "従業員情報管理アプリ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "seed": "node prisma/seed.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "5",
+    "http-auth": "^4.2.1",
+    "pug": "^3.0.4"
+  },
+  "devDependencies": {
+    "prisma": "5"
+  }
+}

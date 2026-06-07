@@ -1,0 +1,24 @@
+// Prismaの設定ファイル
+// データベースの接続設定とテーブルの定義を記述する
+
+// Prisma Clientの生成設定
+generator client {
+  provider = "prisma-client-js"
+}
+
+// データベースの接続設定
+// .envファイルのDATABASE_URLを参照する
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 従業員テーブルの定義
+model Employee {
+  id         Int      @id @default(autoincrement()) // 社員ID（自動採番）
+  name       String   // 氏名
+  department String   // 部門
+  position   String   // 役職
+  hireYear   Int      // 入社年
+  createdAt  DateTime @default(now()) // 登録日時（自動設定）
+}

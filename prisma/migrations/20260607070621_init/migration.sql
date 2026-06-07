@@ -1,0 +1,11 @@
+-- CreateTable
+CREATE TABLE "Employee" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "department" TEXT NOT NULL,
+    "position" TEXT NOT NULL,
+    "hireYear" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Employee_pkey" PRIMARY KEY ("id")
+);

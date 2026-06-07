@@ -1,0 +1,65 @@
+//- employees.pug
+//- 従業員一覧の表示と、部門・役職によるフィルタリング、新規登録フォームへのリンクを提供するページ
+
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    title 従業員一覧
+    style.
+      body { font-family: sans-serif; margin: 40px; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+      th { background-color: #f0f0f0; }
+      form { margin-bottom: 20px; }
+      select, button { margin-right: 8px; padding: 4px 8px; }
+      a { margin-right: 12px; }
+  body
+    h1 従業員一覧
+
+    //- ナビゲーションリンク
+    p
+      a(href="/employees/new") 新規登録
+      a(href="/logout") ログアウト
+
+    //- 部門・役職フィルタリングフォーム
+    form(action="/employees" method="get")
+      //- 部門フィルタ
+      select(name="department")
+        option(value="" selected=department==="") すべての部門
+        option(value="開発部" selected=department==="開発部") 開発部
+        option(value="営業部" selected=department==="営業部") 営業部
+        option(value="人事部" selected=department==="人事部") 人事部
+      //- 役職フィルタ
+      select(name="position")
+        option(value="" selected=position==="") すべての役職
+        option(value="一般" selected=position==="一般") 一般
+        option(value="主任" selected=position==="主任") 主任
+        option(value="課長" selected=position==="課長") 課長
+      button(type="submit") 絞り込む
+
+    //- 従業員一覧テーブル
+    table
+      thead
+        tr
+          th 社員ID
+          th 氏名
+          th 部門
+          th 役職
+          th 入社年
+          th 勤続年数
+      tbody
+        //- employeesの件数が0の場合はメッセージを表示する
+        if employees.length === 0
+          tr
+            td(colspan="6") 該当する従業員が見つかりませんでした
+        else
+          //- each文でemployees配列をループして行を生成する
+          each emp in employees
+            tr
+              td= emp.id
+              td= emp.name
+              td= emp.department
+              td= emp.position
+              td= emp.hireYear
+              td= emp.yearsOfService + '年'
